@@ -4,10 +4,8 @@ require 'rubygems'
 require 'chatterbot/dsl'
 require './tweet'
 
-AVERAGE_HOURS_BETWEEN_TWEETS = 12
-
 # remove this to send out tweets
-debug_mode
+# debug_mode
 
 # remove this to update the db
 no_update
@@ -29,5 +27,6 @@ verbose
 # end
 while true
   tweet Tweet.new.message
-  sleep(rand(120))
+  # sleep for, on average, half a day.
+  sleep(rand(86400))
 end
