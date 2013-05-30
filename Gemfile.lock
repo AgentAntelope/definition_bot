@@ -8,6 +8,7 @@ GEM
       twitter (>= 4.4.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    json (1.7.7)
     launchy (2.3.0)
       addressable (~> 2.3)
     multi_json (1.7.4)
@@ -24,3 +25,4 @@ PLATFORMS
 
 DEPENDENCIES
   chatterbot
+  json (~> 1.7.7)
