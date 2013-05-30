@@ -4,6 +4,8 @@ require 'rubygems'
 require 'chatterbot/dsl'
 require './tweet'
 
+AVERAGE_HOURS_BETWEEN_TWEETS = 12
+
 # remove this to send out tweets
 debug_mode
 
@@ -25,6 +27,7 @@ verbose
 # replies do |tweet|
 #   reply "Yes #USER#, you are very kind to say that!", tweet
 # end
-
-tweet Tweet.new.message
-
+while true
+  tweet Tweet.new.message
+  sleep(rand(120))
+end
