@@ -5,7 +5,7 @@ require 'chatterbot/dsl'
 require './tweet'
 
 # remove this to send out tweets
-# debug_mode
+debug_mode
 
 # remove this to update the db
 no_update
@@ -25,6 +25,7 @@ verbose
 # replies do |tweet|
 #   reply "Yes #USER#, you are very kind to say that!", tweet
 # end
+
 while true
   tweet Tweet.new.message
   # sleep for, on average, half a day.

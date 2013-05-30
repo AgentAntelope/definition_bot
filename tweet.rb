@@ -6,7 +6,6 @@ class Tweet
 
   def initialize
     compose
-    puts message
   end
 
   def compose

@@ -1,1 +1,1 @@
-web: ruby Definition_Bot.rb
+worker: bundle exec ruby Definition_Bot.rb
