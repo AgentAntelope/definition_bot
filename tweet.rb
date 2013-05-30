@@ -1,24 +1,28 @@
-require './dictionary'
-require './word'
-require './definition'
+require_relative 'dictionary'
 
 class Tweet
 
-  attr_accessor :message, :word, :definition
+  attr_accessor :message
 
   def initialize
-    self.word = Word.new
-    self.definition = Definition.new
     compose
     puts message
   end
-  
+
   def compose
   message = " " * 141
     while message.length > 140
-      message = word + Definition.new
+      message = word + definition
       self.message = message
     end
+  end
+
+  def definition
+    Dictionary.array[rand(Dictionary.array.size)].values.first
+  end
+
+  def word
+    Dictionary.array[rand(Dictionary.array.size)].keys.first
   end
 end
 
