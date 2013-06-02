@@ -3,8 +3,10 @@ require_relative 'dictionary'
 class Tweet
 
   attr_accessor :message
+  attr_reader :word
 
-  def initialize
+  def initialize(word = nil)
+    @word = word
     compose
   end
 
@@ -21,6 +23,7 @@ class Tweet
   end
 
   def word
+    return @word if @word
     Dictionary.array[rand(Dictionary.array.size)].keys.first
   end
 end

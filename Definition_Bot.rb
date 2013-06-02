@@ -26,8 +26,31 @@ verbose
 #   reply "Yes #USER#, you are very kind to say that!", tweet
 # end
 
-while true
-  tweet Tweet.new.message
-  # sleep for, on average, half a day.
-  sleep(rand(86400))
+threads = []
+
+threads << Thread.new { replying_to_requests }
+
+threads << Thread.new { standard_tweeting }
+
+def replying_to_requests
+  while true
+    replies do |tweet|
+      match = tweet[:text].match(/please define (\w+)/)
+      if match
+        reply ("#USER# " + Tweet.new(match.captures.first).message)
+      end
+    end
+    sleep(300)
+    # only reply once every 5 minutes.
+  end
 end
+
+def standard_tweeting
+  while true
+    sleep(rand(86400))
+    tweet Tweet.new.message
+    # sleep for, on average, half a day.
+  end
+end
+
+threads.each(&:join)
