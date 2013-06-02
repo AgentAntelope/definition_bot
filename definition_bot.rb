@@ -3,7 +3,6 @@
 require 'rubygems'
 require 'chatterbot/dsl'
 require './tweet'
-require 'date'
 
 # remove this to send out tweets
 # debug_mode
@@ -27,7 +26,7 @@ verbose
 #   reply "Yes #USER#, you are very kind to say that!", tweet
 # end
 
-STARTUP_TIME = DateTime.now
+STARTUP_TIME = Time.now
 
 threads = []
 
@@ -37,20 +36,20 @@ threads << Thread.new { standard_tweeting }
 
 def replying_to_requests
   while true
-    # only reply once every 5 minutes.
-    sleep(300)
 
     replies do |tweet|
       # Possible calls:
       # define #{word}
       match = tweet[:text].match(/(?:define) (\w+)/i)
-      if match && STARTUP_TIME < DateTime.parse(tweet[:created_at])
+      if match && STARTUP_TIME < tweet[:created_at]
+        sleep(30)
         reply ("#USER# " + Tweet.new(match.captures.last).message), tweet
       end
+      sleep(30)
     end
 
     # To avoid tweeting too often
-    sleep(10)
+    sleep(60)
 
     update_config
   end
