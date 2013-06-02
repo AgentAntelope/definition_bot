@@ -34,22 +34,27 @@ threads << Thread.new { standard_tweeting }
 
 def replying_to_requests
   while true
+    # only reply once every 5 minutes.
+    sleep(300)
+
     replies do |tweet|
-      match = tweet[:text].match(/please define (\w+)/)
+      match = tweet[:text].match(/define (\w+)/i)
       if match
-        reply ("#USER# " + Tweet.new(match.captures.first).message)
+        reply ("#USER# " + Tweet.new(match.captures.first).message), tweet
+
+        # To avoid tweeting too often
+        sleep(10)
       end
     end
-    sleep(300)
-    # only reply once every 5 minutes.
   end
 end
 
 def standard_tweeting
   while true
-    sleep(rand(86400))
-    tweet Tweet.new.message
     # sleep for, on average, half a day.
+    sleep(rand(86400))
+
+    tweet Tweet.new.message
   end
 end
 
