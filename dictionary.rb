@@ -7,7 +7,7 @@ class Dictionary
     dictionary = File.open('dictionary_file')
     dictionary.each_line do |line|
       h = {}
-      captures = line.match(/(\w+)( \w+\. .*+)/).captures
+      captures = line.match(/(\w+)(.*+)/).captures
       h[captures.first] = captures.last
       DICTIONARY_ARRAY << h
     end
