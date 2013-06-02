@@ -6,7 +6,7 @@ require './tweet'
 require 'date'
 
 # remove this to send out tweets
-debug_mode
+# debug_mode
 
 # remove this to update the db
 no_update
@@ -46,11 +46,12 @@ def replying_to_requests
       match = tweet[:text].match(/(?:define) (\w+)/i)
       if match && STARTUP_TIME < DateTime.parse(tweet[:created_at])
         reply ("#USER# " + Tweet.new(match.captures.last).message), tweet
-
-        # To avoid tweeting too often
-        sleep(10)
-      end      
+      end
     end
+
+    # To avoid tweeting too often
+    sleep(10)
+
     update_config
   end
 end

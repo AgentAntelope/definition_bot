@@ -6,7 +6,7 @@ class Tweet
   attr_reader :word
 
   def initialize(word = nil)
-    @word = word
+    @word = word.downcase
     compose
   end
 
