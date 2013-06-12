@@ -30,10 +30,6 @@ STARTUP_TIME = Time.now
 
 threads = []
 
-threads << Thread.new { replying_to_requests }
-
-threads << Thread.new { standard_tweeting }
-
 def replying_to_requests
   replied_to_tweet_ids = []
   while true
@@ -65,5 +61,9 @@ def standard_tweeting
     sleep(rand(86400))
   end
 end
+
+threads << Thread.new { replying_to_requests }
+
+threads << Thread.new { standard_tweeting }
 
 threads.each(&:join)
