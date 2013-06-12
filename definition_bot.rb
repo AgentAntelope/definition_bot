@@ -35,15 +35,17 @@ threads << Thread.new { replying_to_requests }
 threads << Thread.new { standard_tweeting }
 
 def replying_to_requests
+  replied_to_tweet_ids = []
   while true
 
     replies do |tweet|
       # Possible calls:
       # define #{word}
       match = tweet[:text].match(/(?:define) (\w+)/i)
-      if match && STARTUP_TIME < tweet[:created_at]
+      if match && STARTUP_TIME < tweet[:created_at] && !replied_to_tweet_ids.include?(tweet[:id])
         sleep(30)
         reply ("#USER# " + Tweet.new(match.captures.last).message), tweet
+        replied_to_tweet_ids << tweet[:id]
       end
       sleep(30)
     end
@@ -57,10 +59,10 @@ end
 
 def standard_tweeting
   while true
+    tweet Tweet.new.message
+
     # sleep for, on average, half a day.
     sleep(rand(86400))
-
-    tweet Tweet.new.message
   end
 end
 
