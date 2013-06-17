@@ -37,7 +37,7 @@ def replying_to_requests
     replies do |tweet|
       # Possible calls:
       # define #{word}
-      initial_match = tweet[:text].match(/(?:define) (\w*-?\w*)/)
+      initial_match = tweet[:text].match(/(?:define) (\w*-?\w*)/i)
 
       if initial_match
         match = initial_match.captures.first.match(/\w.*\w/)
