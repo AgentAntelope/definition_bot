@@ -40,13 +40,13 @@ def replying_to_requests
       initial_match = tweet[:text].match(/(?:define) (\w*-?\w*)/i)
 
       if initial_match
-        match = initial_match.captures.first.match(/\w.*\w/)
+        match = initial_match.captures.first.match(/(\w.*\w)/)
       end
 
       if initial_match && STARTUP_TIME < tweet[:created_at] && !replied_to_tweet_ids.include?(tweet[:id])
 
         sleep(30)
-        if match && match.captures
+        if match && !(match.captures.nil? || match.captures.empty?)
           reply ("#USER# " + Tweet.new(match.captures.first).message), tweet
         else
           reply ("#USER# I'm sorry, I don't know what you're asking me to define!"), tweet
