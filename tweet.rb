@@ -2,8 +2,7 @@ require_relative 'dictionary'
 
 class Tweet
 
-  attr_accessor :message
-  attr_reader :word
+  attr_reader :message
 
   def initialize(word = "")
     @word = word.downcase unless (word.nil? || word.empty?)
@@ -11,10 +10,9 @@ class Tweet
   end
 
   def compose
-  message = " " * 141
-    while message.length > 140
-      message = word + definition
-      self.message = message
+  @message = " " * 141
+    while @message.length > 140
+      @message = word + definition
     end
   end
 
