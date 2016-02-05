@@ -25,4 +25,3 @@ class Tweet
     Dictionary.array[rand(Dictionary.array.size)].keys.first
   end
 end
-
