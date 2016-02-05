@@ -43,7 +43,7 @@ def replying_to_requests
         match = initial_match.captures.first.match(/(\w.*\w)/)
       end
 
-      if initial_match && STARTUP_TIME < tweet[:created_at] && !replied_to_tweet_ids.include?(tweet[:id])
+      if initial_match && STARTUP_TIME < tweet.created_at && !replied_to_tweet_ids.include?(tweet.id)
 
         sleep(30)
         if match && !(match.captures.nil? || match.captures.empty?)
@@ -51,7 +51,7 @@ def replying_to_requests
         else
           reply ("#USER# I'm sorry, I don't know what you're asking me to define!"), tweet
         end
-        replied_to_tweet_ids << tweet[:id]
+        replied_to_tweet_ids << tweet.id
       end
 
       sleep(30)
